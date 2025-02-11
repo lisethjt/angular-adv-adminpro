@@ -102,7 +102,7 @@ export class RegisterComponent {
   showAlert() {
     Swal.fire({
       title: 'Error!',
-      text: 'Ha ocurrido un error',
+      text: 'No se pudo registrar el usuario',
       icon: 'error',
       confirmButtonText: 'Aceptar'
     });

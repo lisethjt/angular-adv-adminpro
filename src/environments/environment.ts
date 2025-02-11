@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    url_register: 'http://localhost:8081/users'
+    url_register: 'http://localhost:8081/users',
+    url_login: 'http://localhost:8081/api/auth'
   };
   
   /*
