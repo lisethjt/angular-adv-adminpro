@@ -7,6 +7,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+  <script>
+    function handleCredentialResponse(response) {
+      console.log("Encoded JWT ID token: " + response.credential);
+    }
+    window.onload = function () {
+      
+      google.accounts.id.prompt(); // also display the One Tap dialog
+    }
+  </script>
+
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
   <link href="assets/css/colors/default-dark.css" id="theme" rel="stylesheet">
@@ -28,6 +40,8 @@
   <!-- ============================================================== -->
   <!-- All Jquery -->
   <!-- ============================================================== -->
+  
+
   <script src="./assets/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap tether Core JavaScript -->
   <script src="./assets/plugins/bootstrap/js/popper.min.js"></script>
