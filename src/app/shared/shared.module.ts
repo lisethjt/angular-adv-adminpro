@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
-
+import { ConvertBase64Pipe } from '../pipes/convert-base64.pipe';
 
 
 
@@ -14,12 +14,14 @@ import { HeaderComponent } from './header/header.component';
   declarations: [
     BreadcrumbsComponent,
     SidebarComponent,
-    HeaderComponent  
+    HeaderComponent,
+    ConvertBase64Pipe
   ],
-  exports:[
+  exports: [
     BreadcrumbsComponent,
     SidebarComponent,
-    HeaderComponent   
+    HeaderComponent,
+    ConvertBase64Pipe
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { User } from '../../models/user.model';
 import { SidebarService } from '../../services/sidebar.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,10 +9,13 @@ import { SidebarService } from '../../services/sidebar.service';
 })
 export class SidebarComponent {
 
-  menuItems: any[];
+  public menuItems: any[];
+  public user: User;
 
-  constructor(private _sidebarService: SidebarService){
+  constructor(private _sidebarService: SidebarService,
+    private _userService: UserService){
     this.menuItems = _sidebarService.menu;
-    console.log(this.menuItems);
+   // this._userService.renew().subscribe();
+    this.user = this._userService.user;  
   }
 }

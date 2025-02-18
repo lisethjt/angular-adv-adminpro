@@ -8,8 +8,14 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="user-profile">
-                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img
-                            src="images/users/profile.png" alt="user" /><span class="hide-menu">Steave Jobs
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                        <div *ngIf="user.image">
+                            <div class="u-img"><img [src]="user.image | convertBase64: 'image/jpeg'" *ngIf="user.image"  alt="user"></div>
+                        </div>
+                        <div *ngIf="!user.image">
+                            <div class="u-img"><img src="images/users/no-user.jpg" alt="user"></div>
+                        </div>                 
+                        <span class="hide-menu">{{ user.name }}
                         </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="javascript:void()">My Profile </a></li>
