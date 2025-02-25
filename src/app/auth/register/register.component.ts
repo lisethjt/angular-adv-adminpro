@@ -44,13 +44,12 @@ export class RegisterComponent {
     }
     
     console.log("Posteando formulario"); 
-    const user = new User(this.registerForm.controls['name'].value, this.registerForm.controls['email'].value, this.registerForm.controls['password'].value, false,'','');
+    const user = new User(0, this.registerForm.controls['name'].value, this.registerForm.controls['email'].value, this.registerForm.controls['password'].value, false,'','');
     this._userService.addUser(user).subscribe(
-      (result: any)=>{
-        if(result.message.code === 400){
+      (result: any)=>{        
+        if(result.message.code == 400){         
           this.showAlert();
-        }else{ 
-          console.log("user" + result.user);
+        }else{          
           localStorage.setItem('token', result.token );
           this._router.navigateByUrl('/');
         }              

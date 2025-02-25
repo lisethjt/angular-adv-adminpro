@@ -6,5 +6,5 @@ export class UserResponse {
         public user: User,
         public token: string,      
         public message: MessageResponse  
-        ){}
+    ){}
 }

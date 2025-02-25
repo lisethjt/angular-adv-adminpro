@@ -1,0 +1,73 @@
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Mi Perfil de Usuario</h4>
+                <h6 class="card-subtitle">Configurar Perfil</h6>
+                <form class="form p-t-20" 
+                                id="profileform" 
+                                autocomplete="off"
+                                [formGroup]="profileForm"
+                                (ngSubmit)="updateProfile()">
+                    <div class="form-group">
+                        <label for="exampleInputuname">Nombre</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input type="text" class="form-control" 
+                                id="exampleInputuname" 
+                                placeholder="Username" 
+                                formControlName="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail">Email</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                            <input type="email" class="form-control" 
+                                id="exampleInputEmail" 
+                                placeholder="Enter email" 
+                                formControlName="email">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block waves-effect waves-light m-r-10"
+                            [disabled]="profileForm.invalid">
+                        <i class="fa fa-save"></i>
+                        Guardar Cambios
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Avatar</h4>
+                <h6 class="card-subtitle">Imagen del Usuario</h6>
+                <div *ngIf="base64textString">
+                    <div class="text-center">
+                        <img [src]="base64textString | convertBase64: 'image/jpeg'" *ngIf="base64textString" style="height: 10rem; max-width: 10rem;"/>
+                    </div>
+                </div>
+                <div *ngIf="!base64textString">
+                    <div class="text-center">
+                        <div class="u-img"><img src="images/users/no-user.jpg" alt="user"></div>
+                    </div>
+                </div>
+
+                <input type="file" class="form-control" (change)="onFileChange($event)"/>
+                <br>
+                <br>
+                <button type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10"
+                    [disabled]="!base64textString"
+                    (click)="uploadImage()">
+                    <i class="fa fa-save"></i>
+                    Cambiar Imagen
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

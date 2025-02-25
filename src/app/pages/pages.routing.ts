@@ -9,6 +9,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
    {
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent, data: { titulo: 'Dashboard'} },
       { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas'} },
       { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Rxjs'} },
+      { path: 'profile', component: ProfileComponent, data: { titulo: 'Perfil de Usuario'} },
     ]
    }
 ];

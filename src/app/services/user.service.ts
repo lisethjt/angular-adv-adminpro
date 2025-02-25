@@ -21,7 +21,7 @@ export class UserService {
 
   constructor(
     private _http: HttpClient) {
-    this.user = new User('', '', '', false, '', '');
+    this.user = new User(0, '', '', '', false, '', '');
   }
 
   addUser(user: User) {
@@ -48,8 +48,8 @@ export class UserService {
     return this._http.get(`${this.url_login}/renew`, { headers })
       .pipe(
         map((resp: any) => {
-          const { email, google, name, role, image } = resp.user;
-          this.user = new User(name, email, '', google, role, image);         
+          const { id, email, google, name, role, image } = resp.user;
+          this.user = new User(id, name, email, '', google, role, image);         
            localStorage.setItem('token', resp.token );
            return true;
         }),
@@ -63,4 +63,26 @@ export class UserService {
   get token(): string {
     return localStorage.getItem('token') || '';
   }
+
+  get uid():number {   
+    return this.user.uid || 0;
+  }
+
+  updateUser(data: { email: string, name: string } ){
+    const headers = new HttpHeaders({
+      'token': this.token,
+    });
+
+    return this._http.put(`${ this.url }/update/${ this.uid }`, data, { headers });
+  }
+
+  
+  uploadImage(data: { image: string | undefined} ){
+    const headers = new HttpHeaders({
+      'token': this.token,
+    });
+
+    return this._http.put(`${ this.url }/uploadImage/${ this.uid }`, data, { headers });
+  }
+
 }
