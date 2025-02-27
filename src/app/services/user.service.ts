@@ -49,9 +49,9 @@ export class UserService {
       .pipe(
         map((resp: any) => {
           const { id, email, google, name, role, image } = resp.user;
-          this.user = new User(id, name, email, '', google, role, image);         
-           localStorage.setItem('token', resp.token );
-           return true;
+          this.user = new User(id, name, email, '', google, role, image);
+          localStorage.setItem('token', resp.token);
+          return true;
         }),
         catchError((error: any) => {
           console.error('Error en renew:', error);
@@ -64,25 +64,44 @@ export class UserService {
     return localStorage.getItem('token') || '';
   }
 
-  get uid():number {   
+  get uid(): number {
     return this.user.uid || 0;
   }
 
-  updateUser(data: { email: string, name: string } ){
+  updateUser(data: { email: string, name: string }) {
     const headers = new HttpHeaders({
       'token': this.token,
     });
 
-    return this._http.put(`${ this.url }/update/${ this.uid }`, data, { headers });
+    return this._http.put(`${this.url}/update/${this.uid}`, data, { headers });
   }
 
-  
-  uploadImage(data: { image: string | undefined} ){
+
+  uploadImage(data: { image: string | undefined }) {
     const headers = new HttpHeaders({
       'token': this.token,
     });
 
-    return this._http.put(`${ this.url }/uploadImage/${ this.uid }`, data, { headers });
+    return this._http.put(`${this.url}/uploadImage/${this.uid}`, data, { headers });
   }
 
+  getUsers(page: number = 0) {
+    const headers = new HttpHeaders({
+      'token': this.token,
+    });
+
+    let size = 10;
+    return this._http.get(`${this.url}/all/${page}/${size}`, { headers });
+  }
+
+  search(name: string) {
+    const headers = new HttpHeaders({
+      'token': this.token,
+    });
+
+    return this._http.get<any[]>(`${this.url}/getByName/${name}`, { headers })
+      .pipe(
+        map((resp: any) => resp.users)
+      );
+  }
 }
