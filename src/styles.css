@@ -22,7 +22,25 @@
     width: 100px;
 }
 
+.w140{
+    width: 140px;
+}
+
 .avatar{
     border-radius: 100%;
     width: 30px;
+}
+
+.oculto{
+    display: none;
+}
+
+.fondo-modal-image{
+    background-color: rgba(0, 0, 0, 0);
+    left: 0px;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 9999;
 }

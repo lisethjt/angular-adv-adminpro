@@ -3,14 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IncrementadorComponent } from './incrementador/incrementador.component';
+import { ModalImageComponent } from './modal-image/modal-image.component';
 
 
 @NgModule({
   declarations: [
-    IncrementadorComponent
+    IncrementadorComponent,
+    ModalImageComponent
   ],
   exports: [
-    IncrementadorComponent
+    IncrementadorComponent,
+    ModalImageComponent
   ],
   imports: [
     CommonModule,

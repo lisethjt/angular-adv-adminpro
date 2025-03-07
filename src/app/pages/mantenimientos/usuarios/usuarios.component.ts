@@ -3,7 +3,10 @@ import Swal from 'sweetalert2';
 import { delay } from 'rxjs';
 
 import { User } from '../../../models/user.model';
+
+import { ModalImageService } from '../../../services/modal-image.service';
 import { UserService } from '../../../services/user.service';
+
 
 @Component({
   selector: 'app-usuarios',
@@ -18,7 +21,9 @@ export class UsuariosComponent {
   public totalPages: number = 20;
   public cargando: boolean = true;
 
-  constructor(private _userService: UserService) {
+  constructor(private _userService: UserService,
+    private _modalService: ModalImageService
+  ) {
 
   }
 
@@ -72,5 +77,46 @@ export class UsuariosComponent {
       .subscribe((result: any[]) => {
         this.users = result;
       });
+  }
+
+  deleteUser(user: User) {
+    if (user.id === this._userService.uid) {
+      Swal.fire('Error', 'No puede borrarse así mismo', 'error');
+    } else {
+      Swal.fire({
+        title: "¿Borar usuario?",
+        text: `Desea borrar el usuario${user.name}`,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, borrarlo!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this._userService.delete(user)
+            .subscribe((resp: any) => {
+              this.getUsers();
+              Swal.fire({
+                title: "Borrar!",
+                text: `El usuario ${user.name} ha sido borrado.`,
+                icon: "success"
+              });
+            });
+        }
+      });
+    }
+  }
+
+  updateRole(user: User) {
+    this._userService.updateRoleUser(user)
+      .subscribe((result: any) => {   
+      },
+        (error: any) => {
+          this.showAlert('Error!', 'El Usuario no pudo ser actualizado', 'error');
+        });
+  }
+
+  openModal(user: User){
+    this._modalService.openModal();
   }
 }

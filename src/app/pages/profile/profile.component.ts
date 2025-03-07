@@ -22,7 +22,8 @@ export class ProfileComponent {
       
     this.profileForm = this.formBuilder.group({
       name: [this.user.name, Validators.required],
-      email: [this.user.email, [Validators.required, Validators.email]]
+      email: [this.user.email, [Validators.required, Validators.email]],
+      role: [this.user.role],
     });
   }
 

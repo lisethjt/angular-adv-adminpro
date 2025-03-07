@@ -32,7 +32,7 @@
                                 <th class="w100">Avatar</th>
                                 <th>Correo</th>
                                 <th>Nombre</th>
-                                <th class="w100">Rol</th>
+                                <th class="w140">Rol</th>
                                 <th class="w100">Auth</th>
                                 <th class="text-nowrap w100">Acciones</th>
                             </tr>
@@ -41,12 +41,21 @@
                             <tr>
                                 <td class="text-center">
                                     <img [src]="user.image | convertBase64: 'image/jpeg'" *ngIf="user.image"
-                                        alt="Avatar" class="avatar" />
-                                    <img src="images/users/no-user.jpg" alt="Avatar" class="avatar" *ngIf="!user.image">
+                                        alt="Avatar" class="avatar cursor" 
+                                        (click)="openModal(user)"/>
+                                    <img src="images/users/no-user.jpg" alt="Avatar" class="avatar cursor" *ngIf="!user.image"
+                                    (click)="openModal(user)">
                                 </td>
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.name }}</td>
-                                <td>{{ user.role }}</td>
+                                <td>
+                                    <select class="form-control"
+                                     [(ngModel)]="user.role"
+                                     (change)="updateRole(user)">
+                                        <option value="ROLE_USER">User</option>
+                                        <option value="ROLE_ADMIN">Admin</option>
+                                    </select>
+                                </td>
                                 <td>
                                     <span class="label label-danger" *ngIf="user.google">Google</span>
                                     <span class="label label-info" *ngIf="!user.google">Email</span>
@@ -54,10 +63,14 @@
 
 
                                 <td class="text-nowrap text-center">
-                                    <a href="#" data-toggle="tooltip" data-original-title="Editar"> <i
-                                            class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Borrar"> <i
-                                            class="fa fa-close text-danger"></i> </a>
+                                    
+                                    <a data-toggle="tooltip" 
+                                       data-original-title="Borrar"
+                                       (click)="deleteUser(user)"
+                                       class="cursor"> 
+                                       
+                                       <i
+                                       class="fa fa-close text-danger"></i> </a>
                                 </td>
 
                             </tr>

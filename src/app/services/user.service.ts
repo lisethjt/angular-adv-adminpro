@@ -65,10 +65,10 @@ export class UserService {
   }
 
   get uid(): number {
-    return this.user.uid || 0;
+    return this.user.id || 0;
   }
 
-  updateUser(data: { email: string, name: string }) {
+  updateUser(data: { email: string, name: string, role: string }) {
     const headers = new HttpHeaders({
       'token': this.token,
     });
@@ -103,5 +103,21 @@ export class UserService {
       .pipe(
         map((resp: any) => resp.users)
       );
+  }
+
+  delete(user:User){
+    const headers = new HttpHeaders({
+      'token': this.token,
+    });
+
+    return this._http.delete<any>(`${this.url}/delete/${user.id}`, { headers });
+  }
+
+  updateRoleUser(data: User) {
+    const headers = new HttpHeaders({
+      'token': this.token,
+    });
+
+    return this._http.put(`${this.url}/update/${data.id}`, data, { headers });
   }
 }
