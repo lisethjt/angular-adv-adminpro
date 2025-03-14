@@ -22,12 +22,15 @@
 
                     <div *ngIf="base64textString">
                         <div class="text-center">
-                            <img [src]="base64textString | convertBase64: 'image/jpeg'" *ngIf="base64textString" style="height: 10rem; max-width: 10rem;"/>
+                            <img [src]="base64textString | convertBase64Copy: 'image/jpeg'" *ngIf="base64textString" style="height: 10rem; max-width: 10rem;"/>                            
                         </div>
                     </div>
                     <div *ngIf="!base64textString">
-                        <div class="text-center">
-                            <div class="u-img"><img src="images/users/no-user.jpg" alt="user"></div>
+                        <div class="text-center" *ngIf="modalService.img">
+                            <img [src]="modalService.img | convertBase64Copy: 'image/jpeg'" style="height: 10rem; max-width: 10rem;"/>                            
+                        </div>
+                        <div class="text-center" *ngIf="!modalService.img">
+                            <div class="u-img"><img src="images/users/no-user.jpg" alt="user"></div>                     
                         </div>
                     </div>
     
@@ -38,7 +41,9 @@
                             class="btn btn-default" 
                             data-dismiss="modal" 
                             (click)="cerrarModal()">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Guardar Imagen</button>
+                    <button type="button" class="btn btn-primary" (click)="uploadImage()">
+                        Guardar Imagen
+                    </button>
                 </div>
             </div>
         </div>

@@ -29,6 +29,7 @@ export class UsuariosComponent {
 
   ngOnInit(): void {
     this.getUsers();
+    this._modalService.newImg.subscribe(img => this.getUsers());
   }
 
   getUsers() {
@@ -117,6 +118,6 @@ export class UsuariosComponent {
   }
 
   openModal(user: User){
-    this._modalService.openModal();
+    this._modalService.openModal(user.id, user.image);
   }
 }

@@ -120,4 +120,12 @@ export class UserService {
 
     return this._http.put(`${this.url}/update/${data.id}`, data, { headers });
   }
+
+  uploadImageById(data: { image: string | undefined }, id:number) {
+    const headers = new HttpHeaders({
+      'token': this.token,
+    });
+
+    return this._http.put(`${this.url}/uploadImage/${id}`, data, { headers });
+  }
 }
