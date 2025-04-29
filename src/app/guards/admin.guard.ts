@@ -9,7 +9,10 @@ export class AdminGuard implements CanActivate {
     private router: Router) { }
 
   canActivate(): boolean {
-    if (this.usuarioService.role === 'ADMIN_ROLE') { return true }
+    console.log('****************' + this.usuarioService.role);
+    if (this.usuarioService.role === 'ROLE_ADMIN') { 
+      this.router.navigateByUrl('/usuarios');
+      return true }
      else {
       this.router.navigateByUrl('/dashboard');
       return false;
