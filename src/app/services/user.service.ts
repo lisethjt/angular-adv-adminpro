@@ -38,6 +38,7 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
   }
 
   renew(): Observable<boolean> {
@@ -51,6 +52,7 @@ export class UserService {
           const { id, email, google, name, role, image } = resp.user;
           this.user = new User(id, name, email, '', google, role, image);
           localStorage.setItem('token', resp.token);
+          localStorage.setItem('menu', JSON.stringify(resp.menu));
           return true;
         }),
         catchError((error: any) => {
@@ -66,6 +68,10 @@ export class UserService {
 
   get uid(): number {
     return this.user.id || 0;
+  }
+
+  get role(): any{
+    return this.user.role;
   }
 
   updateUser(data: { email: string, name: string, role: string }) {

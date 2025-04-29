@@ -11,6 +11,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromesasComponent } from './promesas/promesas.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
    {
@@ -27,8 +28,8 @@ const routes: Routes = [
       { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Rxjs'} },
       { path: 'profile', component: ProfileComponent, data: { titulo: 'Perfil de Usuario'} },
 
-      //Mantenimientos
-      { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios de aplicación'} },
+      //Rutas de admin
+      { path: 'usuarios', canActivate: [AdminGuard], component: UsuariosComponent, data: { titulo: 'Usuarios de aplicación'} },
     ]
    }
 ];

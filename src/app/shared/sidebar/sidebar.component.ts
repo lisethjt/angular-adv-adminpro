@@ -9,12 +9,12 @@ import { UserService } from '../../services/user.service';
 })
 export class SidebarComponent {
 
-  public menuItems: any[];
+ // public menuItems: any[];
   public user: User;
 
-  constructor(private _sidebarService: SidebarService,
+  constructor(public _sidebarService: SidebarService,
     private _userService: UserService){
-    this.menuItems = _sidebarService.menu;
+  //  this.menuItems = _sidebarService.menu;
    // this._userService.renew().subscribe();
     this.user = this._userService.user;  
   }
